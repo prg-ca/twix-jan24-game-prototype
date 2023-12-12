@@ -1,0 +1,165 @@
+:root {
+  --bg-color: #ecab00;
+  --accent-color: #ed1c24;
+  --additional-color: #f0bb34;
+  --txt-color: #490e00;
+}
+
+
+  /* BASIC STYLES */
+
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
+html {
+  max-width: 100%;
+  overflow-x: hidden;
+  padding: 0;
+
+  font-size: 36%; 
+  /*font-size: 62.5%; /* = 1rem = 10px */
+  transition: all 0.3s;
+}
+
+
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4rem; 
+  background-color: var(--bg-color);
+  color: var(--txt-color);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+body.modal {
+  overflow-y: hidden;
+}
+
+body * {
+  font-family: inherit;
+  font-weight: normal;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+button:active,
+button:focus {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* MAIN STYLES */
+
+.game__container {
+  width: 63rem;
+  height: 63rem;
+  position: relative;
+  /* outline: 1px green solid; */
+  overflow: hidden;
+}
+
+.game__line {
+  width: 252rem;
+  height: 21rem;
+  background-size: 252rem 21rem;
+  position: relative;
+  transition: left;
+}
+
+.game__line--01 {
+  width: 63rem;
+  background-color: thistle;
+  background-image: url("images/line01.png");
+  background-position: 0 0;
+  left: 0;
+}
+
+.game__line--02 {
+  background-color: tomato;
+  background-image: url("images/line02.png");
+  cursor: pointer;
+
+  /* left: -10%; */
+}
+
+.game__line--03 {
+  background-color: teal;
+  background-image: url("images/line03.png");
+  cursor: pointer;
+  left: -10%;
+}
+
+@keyframes errorAnim {
+  from {
+    background-color: rgba(255, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(255, 0, 0, 0.4);
+  }
+}
+.error {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0);
+  /* animation: none; */
+}
+
+.visible {
+  animation: errorAnim;
+  animation-duration: 0.1s;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+  animation-iteration-count: 5;
+  animation-fill-mode: backwards;
+}
+
+/* @keyframes anim02 {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+@keyframes anim03 {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -133.3% 0;
+  }
+} */
+/* 
+.anim-02 {
+  animation-name: anim02;
+  animation-duration: 6s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+
+.anim-03 {
+  animation-name: anim03;
+  animation-duration: 6s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+   */
