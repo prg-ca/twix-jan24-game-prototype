@@ -5,6 +5,25 @@
   --txt-color: #490e00;
 }
 
+/* @property --progress-value {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+} */
+
+@font-face {
+  font-family: 'Twix';
+  src: url('fonts/TwixHighlightCompressedKz.eot');
+  src: url('fonts/TwixHighlightCompressedKz.eot?#iefix') format('embedded-opentype'),
+      url('fonts/TwixHighlightCompressedKz.woff2') format('woff2'),
+      url('fonts/TwixHighlightCompressedKz.woff') format('woff'),
+      url('fonts/TwixHighlightCompressedKz.ttf') format('truetype'),
+      url('fonts/TwixHighlightCompressedKz.svg#TwixHighlightCompressedKz') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+
 
   /* BASIC STYLES */
 
@@ -31,7 +50,7 @@ body {
   padding: 0;
   margin: 0;
   min-height: 100vh;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Twix', sans-serif;
   font-size: 1.4rem; 
   background-color: var(--bg-color);
   color: var(--txt-color);
@@ -68,12 +87,103 @@ a {
 
 /* MAIN STYLES */
 
+.game__header {
+  font: 'Twix';
+  font-size: 7.2rem;
+  color: var(--txt-color);
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.game__descr {
+  font: 'Twix';
+  font-size: 5rem;
+  color: var(--txt-color);
+  margin: 0;
+  margin-bottom: 4rem;
+}
+
+.game__var {
+  font: 'Twix';
+  font-size: 4rem;
+  color: var(--txt-color);
+  margin-bottom: 2rem;
+}
+
+.game__var:hover {
+  color: var(--accent-color);
+}
+
+
+/* TIMER STYLES */
+
+.game__timer {
+  width: 10rem;
+  height: 10rem;
+  /* outline: 1px green solid; */
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.game__timer--hidden {
+  opacity: 0;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 282.6px;
+  }
+}
+
+.game__timer--anim {
+  stroke-dasharray: 282.6px;
+  stroke-dashoffset: 0;
+  animation: dash 10s linear forwards;
+}
+
+.paused{
+  -webkit-animation-play-state:paused;
+  -moz-animation-play-state:paused;
+  -o-animation-play-state:paused; 
+  animation-play-state:paused;
+}
+
+.game__time { 
+  font: 'Twix';
+  font-size: 6rem;
+  color: var(--txt-color);
+  text-align: center;
+  
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* END OF TIMER STYLES */
+
 .game__container {
   width: 63rem;
   height: 63rem;
   position: relative;
   /* outline: 1px green solid; */
   overflow: hidden;
+  transition: all 0.3s linear;
+}
+
+.game__container--success {
+  outline: 1rem solid white;
+  transform: scale(1.2);
+}
+.game__container--fail {
+  outline: 1rem solid var(--accent-color);
+  transform: scale(1.2);
 }
 
 .game__line {
@@ -86,14 +196,14 @@ a {
 
 .game__line--01 {
   width: 63rem;
-  background-color: thistle;
+  /* background-color: thistle; */
   background-image: url("images/line01.png");
   background-position: 0 0;
   left: 0;
 }
 
 .game__line--02 {
-  background-color: tomato;
+  /* background-color: tomato; */
   background-image: url("images/line02.png");
   cursor: pointer;
 
@@ -101,10 +211,10 @@ a {
 }
 
 .game__line--03 {
-  background-color: teal;
+  /* background-color: teal; */
   background-image: url("images/line03.png");
   cursor: pointer;
-  left: -10%;
+  /* left: -10%; */
 }
 
 @keyframes errorAnim {
@@ -120,6 +230,11 @@ a {
   height: 100%;
   background-color: rgba(255, 0, 0, 0);
   /* animation: none; */
+}
+
+.error--fail {
+  background-color: rgba(255, 0, 0, 0.4);
+  animation: none; 
 }
 
 .visible {
@@ -163,3 +278,68 @@ a {
   animation-iteration-count: infinite;
 }
    */
+
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+}
+
+.game__popUp {
+  width: 60rem;
+  height: 50rem;
+  padding: 2rem;
+  border-radius: 2rem;
+  background-color: var(--bg-color);
+  position: absolute;
+  margin: 0 auto;
+  top: 30%;
+  /* display: flex;
+  flex-direction: column  ;
+  justify-content: center;
+  align-items: center; */
+  display: none;
+}
+
+.visible__popup {
+  display: block;
+  display: flex;
+  flex-direction: column  ;
+  justify-content: center;
+  align-items: center;
+}
+
+.game__subheader {
+  font: 'Twix';
+  font-size: 5rem;
+  color: var(--txt-color);
+  text-align: center;
+}
+
+.game__btn {
+  outline: none;
+  border: 0;
+  width: 50%;
+  padding: 1.4rem 1.2rem;
+  background-color: var(--accent-color);
+  border-radius: 1.5rem;
+  cursor: pointer;
+  transition: all 0.1s;
+  margin: 0 auto;
+
+  color: #fff;
+  font-family: 'Twix', Arial, Helvetica, sans-serif;
+  font-size: 4.2rem;
+  font-kerning: normal;
+  letter-spacing: 0.1rem;
+}
+
+.game__btn:hover {
+  transform: scale(1.03);
+}
+.game__btn:active {
+  transform: scale(0.96);
+}

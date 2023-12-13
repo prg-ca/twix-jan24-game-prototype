@@ -20,6 +20,8 @@ function startAnim() {
   let start, previousTimeStamp;
   let done2 = false;
   let done3 = false;
+  let fail2 = false;
+  let fail3 = false;
 
   function showSuccessPopUp() {
     console.log("success")
@@ -34,15 +36,20 @@ function startAnim() {
   
   function showFailPopUp() {
     console.log("fail")
-    timer.classList.add('game__timer--hidden')
-    gameContainer.classList.add('game__container--fail')
-    if (!done2) {
-      error02.classList.add('error--fail');
-    }
-    if (!done3) {
-      error03.classList.add('error--fail');
-    }
-  
+    
+    setTimeout(() => {
+      timer.classList.add('game__timer--hidden')
+      gameContainer.classList.add('game__container--fail')
+      if (fail2) {
+        // error02.classList.remove('visible');
+        error02.classList.add('error--fail');
+      }
+      if (fail3) {
+        // error03.classList.remove('visible');
+        error03.classList.add('error--fail');
+      }
+    }, 400)
+    
     setTimeout(() => {
       popUpOverlay.classList.add('visible__popup')
       popUpFail.classList.add('visible__popup')
@@ -109,6 +116,10 @@ function startAnim() {
       done2 = handleRightClickRightSide(left2, line02, error02, stopImg2)
     } else {
       handleErrorClick(error02)
+      setTimeout(() => {        
+        done2 = true;
+        fail2 = true;
+      }, 300)
     }
   }
 
@@ -119,6 +130,10 @@ function startAnim() {
       done3 = handleRightClickRightSide( left3, line03,error03, stopImg3)
     } else {
       handleErrorClick(error03)
+      setTimeout(() => {        
+        done3 = true;
+        fail3 = true;
+      }, 300)
     }
   }
 
@@ -177,7 +192,11 @@ function startAnim() {
         window.requestAnimationFrame(step);
       } else {
         clearAfterTimeEnded(timeInt);
-        showSuccessPopUp()
+        if (fail2 || fail3) {
+          showFailPopUp()
+        } else {
+          showSuccessPopUp()
+        }
       }
     }
   }
