@@ -2,8 +2,10 @@ const gameContainer = document.getElementById("game-container")
 
 const line02 = document.getElementById("game-line-02")
 const line03 = document.getElementById("game-line-03")
+const line04 = document.getElementById("game-line-04")
 const error02 = document.getElementById("game-error-02")
 const error03 = document.getElementById("game-error-03")
+const error04 = document.getElementById("game-error-04")
 const timer = document.getElementById("game-timer")
 const timerTime = document.getElementById("timer-time")
 const timerProgress = document.getElementById('timer-progress');
@@ -17,9 +19,11 @@ const popUpFail = document.getElementById('game-popup-fail')
 function startAnim() {
   let left2 = -150;
   let left3 = -75;
+  let left4 = -225;
   let start, previousTimeStamp;
   let done2 = false;
   let done3 = false;
+  let done4 = false;
 
   function showSuccessPopUp() {
     console.log("success")
@@ -41,6 +45,9 @@ function startAnim() {
     }
     if (!done3) {
       error03.classList.add('error--fail');
+    }
+    if (!done4) {
+      error04.classList.add('error--fail');
     }
   
     setTimeout(() => {
@@ -78,6 +85,7 @@ function startAnim() {
   }
 
   function handleErrorClick(errorEl) {
+    console.log(errorEl)
     errorEl.classList.add('visible');
     setTimeout(() => {
       errorEl.classList.remove('visible');
@@ -85,16 +93,12 @@ function startAnim() {
   }
   
   function handleRightClickLeftSide(left, line,error, fn) {
-    // done = true;
     left = -300;
-      // console.log('done2', done2 )
-      // console.log('done from func', done )
     line.style.left = `${left}%`;
     endOfGameForLine(line, fn, error) 
     return true;
   }
   function handleRightClickRightSide(left, line, error, fn) {
-    // done = true;
     left = 0 ;
     line.style.left = `${left}%`;
     endOfGameForLine(line, fn, error) 
@@ -114,37 +118,33 @@ function startAnim() {
 
   function stopImg3() {
     if (left3 <= -280  && left3 >= -300) {
-      done3 =handleRightClickLeftSide( left3, line03,error03, stopImg3)
+      done3 = handleRightClickLeftSide( left3, line03,error03, stopImg3)
     } else if (left3 <= 0  && left3 >= -20) {
       done3 = handleRightClickRightSide( left3, line03,error03, stopImg3)
     } else {
       handleErrorClick(error03)
     }
   }
-
-
-  // function stopImg(done, left, line, error) {
-  //   if (left <= -280  && left >= -300) {
-  //     // console.log('click')
-  //     // console.log(left)
-  //     handleRightClickLeftSide(done, left, line, () => stopImg(done, left, line, error))
-  //   } else if (left <= 0  && left >= -20) {
-  //     // console.log('click')
-  //     // console.log(left)
-  //     handleRightClickRightSide(done, left, line, () => stopImg(done, left, line, error))
-  //   } else {
-  //     handleErrorClick(error)
-  //   }
-  // }
+  function stopImg4() {
+    if (left4 <= -280  && left4 >= -300) {
+      done4 = handleRightClickLeftSide( left4, line04,error04, stopImg4)
+    } else if (left4 <= 0  && left4 >= -20) {
+      done4 = handleRightClickRightSide( left4, line04,error04, stopImg4)
+    } else {
+      handleErrorClick(error04)
+    }
+  }
 
 
 
-  let startingPoint = 10;
+
+  let startingPoint = 15;
   const timeInt = startTimer(startingPoint);
 
 
   line02.addEventListener('click', stopImg2)
   line03.addEventListener('click',  stopImg3)
+  line04.addEventListener('click',  stopImg4)
 
   function step(timeStamp) {
     if (start === undefined) {
@@ -154,7 +154,7 @@ function startAnim() {
 
     if (previousTimeStamp !== timeStamp) {
       if (!done2) {
-        left2 -= 1;
+        left2 -= 2;
         line02.style.left = `${left2}%`;
         if (left2 === -300) {
           left2 = 0;
@@ -168,12 +168,20 @@ function startAnim() {
           left3 = -300;
         };
       }
+
+      if (!done4) {
+        left4 -= 2.5;
+        line04.style.left = `${left4}%`;
+        if (left4 === -300) {
+          left4 = 0;
+        };
+      }
     }
 
     
     if (elapsed < startingPoint * 1000) {
       previousTimeStamp = timeStamp;
-      if (!(done2 && done3)) {
+      if (!(done2 && done3 && done4)) {
         window.requestAnimationFrame(step);
       } else {
         clearAfterTimeEnded(timeInt);

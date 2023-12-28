@@ -7,9 +7,39 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1 class="game__header">Собери Twix® - момент </h1>
-  <p class="game__descr">Кликай на двигающиеся блоки и собирай картинки</p>
-  <a href="var01.html" class="game__var">Вариант 1, неправильные не останавливаются</a>
-  <a href="var02.html" class="game__var">Вариант 2, неправильные останавливаются</a>
+  <!-- <h1 class="game__subheader">Вариант 1, неправильные не останавливаются </h1> -->
+  <div class="game__timer" id="game-timer">
+    <svg width="100" height="100" viewBox="0 0 100 100" style="transform: rotate(-90deg)">
+      <circle r="45" cx="50" cy="50" fill="transparent" stroke="#f0bb34" stroke-width="8px"></circle>
+      <circle id="timer-progress" r="45" cx="50" cy="50" fill="transparent" stroke="#490e00" stroke-width="8px" stroke-dasharray="282.6px" stroke-dashoffset="0"></circle>
+      <!-- <text id="timer-text" x="27px" y="8px" fill="#490e00" font-size="50px" font-weight="bold" style="transform:rotate(90deg) translate(0px, -40px)">90</text> -->
+    </svg>
+    <span class="game__time" id="timer-time">10</span>
+  </div>
+  <div class="game__container" id="game-container">
+    <div class="game__line  game__line--01" id="game-line-01"></div>
+    <div class="game__line  game__line--02 anim-02"  id="game-line-02">
+      <div class="error" id="game-error-02"></div>
+    </div>
+    <div class="game__line  game__line--03 anim-03"  id="game-line-03">
+      <div class="error" id="game-error-03"></div>
+    </div>
+    <div class="game__line  game__line--04"  id="game-line-04">
+      <div class="error" id="game-error-04"></div>
+    </div>
+  </div>
+  
+  <div class="overlay" id="overlay"></div>
+  <div class="game__popUp" id="game-popup-success">
+    <h2 class="game__subheader">Ты молодец и все собрал. Теперь иди сканировать штрих-код</h2>
+    <button class="game__btn">Играть еще</button>
+  </div>
+  <div class="game__popUp" id="game-popup-fail">
+    <h2 class="game__subheader">Немолодец, давай снова</h2>
+    <button class="game__btn">Играть еще</button>
+  </div>
+  
+  
+  <script src="script.js"></script>
 </body>
 </html>

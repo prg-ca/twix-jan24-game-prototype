@@ -37,8 +37,9 @@ html {
   overflow-x: hidden;
   padding: 0;
 
-  font-size: 36%; 
+  /* font-size: 36%;  */
   /*font-size: 62.5%; /* = 1rem = 10px */
+  font-size: 62.5%;
   transition: all 0.3s;
 }
 
@@ -141,7 +142,7 @@ a {
 .game__timer--anim {
   stroke-dasharray: 282.6px;
   stroke-dashoffset: 0;
-  animation: dash 10s linear forwards;
+  animation: dash 15s linear forwards;
 }
 
 .paused{
@@ -169,10 +170,10 @@ a {
 /* END OF TIMER STYLES */
 
 .game__container {
-  width: 63rem;
-  height: 63rem;
+  width: 44rem;
+  height: 58.6rem;
   position: relative;
-  /* outline: 1px green solid; */
+  outline: 1px green solid;
   overflow: hidden;
   transition: all 0.3s linear;
 }
@@ -187,19 +188,20 @@ a {
 }
 
 .game__line {
-  width: 252rem;
-  height: 21rem;
-  background-size: 252rem 21rem;
+  width: 176rem;
+  height: 14.65rem;
+  background-size: 176rem 14.65rem;
   position: relative;
   transition: left;
 }
 
 .game__line--01 {
-  width: 63rem;
+  /* width: 176rem; */
   /* background-color: thistle; */
   background-image: url("images/line01.png");
   background-position: 0 0;
   left: 0;
+  left: -300%;
 }
 
 .game__line--02 {
@@ -213,6 +215,12 @@ a {
 .game__line--03 {
   /* background-color: teal; */
   background-image: url("images/line03.png");
+  cursor: pointer;
+  /* left: -10%; */
+}
+.game__line--04 {
+  /* background-color: teal; */
+  background-image: url("images/line04.png");
   cursor: pointer;
   /* left: -10%; */
 }
@@ -245,8 +253,8 @@ a {
   animation-iteration-count: 5;
   animation-fill-mode: backwards;
 }
-
-/* @keyframes anim02 {
+/* 
+@keyframes anim02 {
   from {
     background-position: 0 0;
   }
@@ -261,8 +269,8 @@ a {
   to {
     background-position: -133.3% 0;
   }
-} */
-/* 
+}
+
 .anim-02 {
   animation-name: anim02;
   animation-duration: 6s;
@@ -277,7 +285,7 @@ a {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
-   */
+    */
 
 
 .overlay {
