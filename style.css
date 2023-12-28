@@ -173,7 +173,7 @@ a {
   width: 44rem;
   height: 58.6rem;
   position: relative;
-  outline: 1px green solid;
+  /* outline: 1px green solid; */
   overflow: hidden;
   transition: all 0.3s linear;
 }
@@ -350,4 +350,36 @@ a {
 }
 .game__btn:active {
   transform: scale(0.96);
+}
+
+
+
+@media screen and (max-width: 440px) {
+  body {
+    justify-content: flex-start;
+  }
+  .game__timer {
+    /* outline: 1px red solid; */
+    transform: scale(0.6);
+    margin-top: 2rem;
+  }
+
+  .game__container {
+    margin-top: -8rem;
+    transform: scale(0.8);
+  }
+
+  .game__popUp {
+    width: 80%;
+    height: 30rem;
+  }
+
+  .game__subheader { 
+    font-size: 3rem;
+  }
+
+  .game__btn {
+    width: 80%;
+    font-size: 3rem;
+  }
 }
